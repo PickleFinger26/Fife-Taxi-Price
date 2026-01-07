@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Kirkcaldy Taxi Quotes</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Taxi Quotes">
+
+  <style>
+    :root{--bg:#0b1220;--card:#111b2e;--text:#e8eefc;--muted:#a9b6d3;--line:#223154;--accent:#7aa2ff;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 28px}
+    h1{font-size:18px;margin:0 0 6px}
+    .sub{margin:0;color:var(--muted);font-size:12px;line-height:1.35}
+    .grid{display:grid;gap:14px;grid-template-columns:1fr}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
+    input,select{width:100%;background:#0e172a;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;line-height:1.2}
+    input:focus,select:focus{border-color:var(--accent);outline:none}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:520px){.row{grid-template-columns:1fr}}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{border:0;border-radius:14px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer;background:var(--accent);color:#081022;flex:1}
+    button.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
+    .quote{font-size:34px;font-weight:900;letter-spacing:-0.6px;margin:8px 0 0}
+    .status{margin-top:6px;font-size:12px;color:#ffdf8a;min-height:16px}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    td{padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
+    td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+    .pill{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;margin-right:6px;margin-top:6px}
+    .hint{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.35}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Kirkcaldy Taxi Quotes</h1>
+    <p class="sub">Pickup and drop-off are required. Use Google Maps to compute miles, then calculate the fare.</p>
+    <div>
+      <span class="pill">PWA</span>
+      <span class="pill">Stage 1 / Stage 2</span>
+      <span class="pill">Google distance</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="row">
+          <div>
+            <label for="pickup">Pickup (required)</label>
+            <input id="pickup" type="text" placeholder="Type pickup address" autocomplete="street-address" />
+            <div class="btns" style="margin-top:8px">
+              <button id="useLocationBtn" type="button" class="secondary">Use my location</button>
+            </div>
+            <div class="hint">Geolocation needs HTTPS and permission. Hosted GitHub Pages URL in Safari works best on iPhone.</div>
+          </div>
+
+          <div>
+            <label for="dropoff">Drop-off (required)</label>
+            <input id="dropoff" type="text" placeholder="Type destination address" autocomplete="street-address" />
+            <div class="btns" style="margin-top:8px">
+              <button id="getDistanceBtn" type="button">Get distance</button>
+            </div>
+            <div class="hint" id="routeInfo">Distance not calculated yet.</div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:6px">
+          <div>
+            <label for="preset">Preset miles (optional)</label>
+            <select id="preset">
+              <option value="">— Select —</option>
+              <option value="25">Kirkcaldy → Edinburgh (approx. 25 mi)</option>
+              <option value="65">Kirkcaldy → Glasgow (approx. 65 mi)</option>
+              <option value="27">Kirkcaldy → Dundee (approx. 27 mi)</option>
+              <option value="110">Kirkcaldy → Aberdeen (approx. 110 mi)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="distanceMi">Distance (miles)</label>
+            <input id="distanceMi" type="number" min="0" step="0.1" inputmode="decimal" value="0.0" />
+            <div class="hint">Filled by “Get distance” or enter manually.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="stage">Stage</label>
+            <select id="stage">
+              <option value="1">Stage 1 (06:00–22:00)</option>
+              <option value="2">Stage 2 (22:00–06:00 / beyond Fife boundary)</option>
+            </select>
+          </div>
+          <div>
+            <label for="waitingMin">Waiting (minutes)</label>
+            <input id="waitingMin" type="number" min="0" step="1" inputmode="numeric" value="0" />
+          </div>
+        </div>
+
+        <div class="btns">
+          <button id="calcBtn" type="button">Calculate</button>
+          <button id="resetBtn" type="button" class="secondary">Reset</button>
+        </div>
+
+        <div class="hint">
+          Setup required: replace <strong>YOUR_API_KEY</strong> in the Google script tag at the bottom of this file,
+          and enable Maps JavaScript API + Places API for that key.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="quote" id="total">£0.00</div>
+        <div class="status" id="status">Enter pickup & drop-off. Get distance. Then Calculate.</div>
+
+        <table>
+          <tbody>
+            <tr><td>Distance charge</td><td id="distCharge">£0.00</td></tr>
+            <tr><td>Waiting charge</td><td id="waitCharge">£0.00</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong id="total2">£0.00</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p class="sub" style="margin-top:10px">
+          Tariff: Stage 1 £3.60 up to 549m then £0.20 per 137m; Stage 2 £4.50 up to 549m then £0.25 per 137m; Waiting £0.20 per 48s.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------------------------
+    // Fare calculator (global)
+    // ---------------------------
+    const METERS_PER_MILE = 1609.344;
+
+    const TARIFF = {
+      stage1: { baseMeters: 549, baseFare: 3.60, stepMeters: 137, stepFare: 0.20 },
+      stage2: { baseMeters: 549, baseFare: 4.50, stepMeters: 137, stepFare: 0.25 },
+      waiting: { periodSeconds: 48, periodFare: 0.20 }
+    };
+
+    function money(n){
+      const v = Math.round(n * 100) / 100;
+      return '£' + v.toFixed(2);
+    }
+
+    function calcDistanceFare(meters, stageNum){
+      const cfg = (stageNum === 2) ? TARIFF.stage2 : TARIFF.stage1;
+      if (meters <= 0) return 0;
+      if (meters <= cfg.baseMeters) return cfg.baseFare;
+      const extra = meters - cfg.baseMeters;
+      const steps = Math.ceil(extra / cfg.stepMeters);
+      return cfg.baseFare + steps * cfg.stepFare;
+    }
+
+    function calcWaitingFare(mins){
+      const sec = Math.max(0, mins) * 60;
+      if (sec <= 0) return 0;
+      const periods = Math.ceil(sec / TARIFF.waiting.periodSeconds);
+      return periods * TARIFF.waiting.periodFare;
+    }
+
+    function calculate(){
+      const mi = parseFloat(document.getElementById('distanceMi').value || '0');
+      const meters = Math.max(0, mi) * METERS_PER_MILE;
+
+      const stageNum = parseInt(document.getElementById('stage').value, 10);
+      const mins = parseFloat(document.getElementById('waitingMin').value || '0');
+
+      const d = calcDistanceFare(meters, stageNum);
+      const w = calcWaitingFare(mins);
+      const t = d + w;
+
+      document.getElementById('distCharge').textContent = money(d);
+      document.getElementById('waitCharge').textContent = money(w);
+      document.getElementById('total').textContent = money(t);
+      document.getElementById('total2').textContent = money(t);
+      document.getElementById('status').textContent = 'Ready';
+    }
+
+    function resetAll(){
+      document.getElementById('pickup').value = '';
+      document.getElementById('dropoff').value = '';
+      document.getElementById('preset').value = '';
+      document.getElementById('distanceMi').value = '0.0';
+      document.getElementById('stage').value = '1';
+      document.getElementById('waitingMin').value = '0';
+      document.getElementById('routeInfo').textContent = 'Distance not calculated yet.';
+      document.getElementById('status').textContent = 'Enter pickup & drop-off. Get distance. Then Calculate.';
+      calculate();
+    }
+
+    // ---------------------------
+    // Google Maps: Places + Directions
+    // ---------------------------
+    let pickupPlace = null;
+    let dropoffPlace = null;
+    let pickupLatLng = null;
+
+    function requireText(id, friendlyName){
+      const el = document.getElementById(id);
+      const value = (el.value || '').trim();
+      if (!value) throw new Error('Please enter a ' + friendlyName + '.');
+      return value;
+    }
+
+    // Called by Google script (callback=initMaps)
+    function initMaps(){
+      const status = document.getElementById('status');
+      const pickupInput = document.getElementById('pickup');
+      const dropoffInput = document.getElementById('dropoff');
+
+      try{
+        const pickupAC = new google.maps.places.Autocomplete(pickupInput, { fields: ['geometry', 'formatted_address'] });
+        const dropoffAC = new google.maps.places.Autocomplete(dropoffInput, { fields: ['geometry', 'formatted_address'] });
+
+        pickupAC.addListener('place_changed', () => {
+          pickupPlace = pickupAC.getPlace();
+          pickupLatLng = null;
+          status.textContent = 'Pickup set. Enter drop-off then Get distance.';
+        });
+
+        dropoffAC.addListener('place_changed', () => {
+          dropoffPlace = dropoffAC.getPlace();
+          status.textContent = 'Drop-off set. Tap Get distance.';
+        });
+
+        document.getElementById('useLocationBtn').addEventListener('click', () => {
+          if (!navigator.geolocation){
+            alert('Geolocation not supported on this device.');
+            return;
+          }
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              pickupLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+              pickupPlace = null;
+              pickupInput.value = 'Current location';
+              status.textContent = 'Pickup set to current location. Enter drop-off then Get distance.';
+            },
+            () => alert('Could not get location. Check permissions and ensure you are on HTTPS.')
+          );
+        });
+
+        document.getElementById('getDistanceBtn').addEventListener('click', () => {
+          try{
+            if (!pickupLatLng) requireText('pickup', 'pickup location');
+            requireText('dropoff', 'drop-off location');
+
+            const origin =
+              pickupLatLng
+                ? pickupLatLng
+                : (pickupPlace && pickupPlace.geometry ? pickupPlace.geometry.location : pickupInput.value);
+
+            const destination =
+              (dropoffPlace && dropoffPlace.geometry ? dropoffPlace.geometry.location : dropoffInput.value);
+
+            if (!origin || !destination){
+              alert('Please enter a pickup and drop-off.');
+              return;
+            }
+
+            status.textContent = 'Calculating route…';
+
+            const ds = new google.maps.DirectionsService();
+            ds.route(
+              { origin, destination, travelMode: google.maps.TravelMode.DRIVING },
+              (result, routeStatus) => {
+                if (routeStatus !== 'OK' || !result?.routes?.[0]?.legs?.[0]){
+                  alert('Could not calculate route. Check addresses and try again.');
+                  status.textContent = 'Route failed. Check addresses.';
+                  return;
+                }
+
+                const leg = result.routes[0].legs[0];
+                const meters = leg.distance.value;
+                const miles = meters / METERS_PER_MILE;
+
+                document.getElementById('distanceMi').value = miles.toFixed(1);
+                document.getElementById('routeInfo').textContent =
+                  'Route: ' + leg.distance.text + ' • approx ' + miles.toFixed(1) + ' miles';
+
+                calculate();
+              }
+            );
+          }catch(err){
+            alert(err.message || 'Please enter pickup and drop-off.');
+          }
+        });
+
+        document.getElementById('preset').addEventListener('change', (e) => {
+          if (e.target.value){
+            document.getElementById('distanceMi').value = e.target.value;
+            status.textContent = 'Preset miles selected. Press Calculate.';
+          }
+        });
+
+        document.getElementById('calcBtn').addEventListener('click', calculate);
+        document.getElementById('resetBtn').addEventListener('click', resetAll);
+
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('sw.js').catch(()=>{});
+        }
+
+        status.textContent = 'Enter pickup and drop-off, then Get distance.';
+      }catch(e){
+        status.textContent = 'Maps not available. You can still type miles manually.';
+      }
+    }
+
+    window.addEventListener('load', () => calculate());
+  </script>
+
+  <!-- REPLACE YOUR_API_KEY. Keep callback=initMaps -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMaps" async defer></script>
+</body>
+</html>
