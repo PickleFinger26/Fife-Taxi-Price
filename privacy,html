@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — Fife Taxi Price</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b1220;color:#e8eefc}
+    .wrap{max-width:900px;margin:0 auto;padding:24px 16px 48px}
+    h1{font-size:22px;margin:0 0 8px}
+    h2{font-size:16px;margin:22px 0 8px}
+    p,li{color:#a9b6d3;line-height:1.5}
+    a{color:#7aa2ff}
+    .card{background:#111b2e;border:1px solid #223154;border-radius:14px;padding:14px;margin-top:14px}
+    .muted{color:#a9b6d3}
+    code{background:#0e172a;border:1px solid #223154;padding:2px 6px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Privacy Policy — Fife Taxi Price</h1>
+    <p class="muted"><strong>Effective date:</strong> 2026-01-07</p>
+
+    <div class="card">
+      <p>
+        This Privacy Policy explains how <strong>Fife Taxi Price</strong> (“we”, “us”, “our”) handles information when you use our quote
+        calculator and distance features. This app is designed to generate fare estimates based on distance and optional waiting time.
+      </p>
+      <p>
+        If you have questions, contact us at: <strong>its.me.jack.09@gmail.com</strong>
+      </p>
+    </div>
+
+    <h2>Summary</h2>
+    <ul>
+      <li>We use Google services to calculate routes and distances when you request them.</li>
+      <li>If you tap “Use my location”, your device may share your location to provide a pickup point.</li>
+      <li>We display advertising in the Android app (AdMob). Advertising partners may collect device identifiers for ad delivery and measurement.</li>
+      <li>We do not intentionally collect sensitive personal information, and we do not sell your personal data.</li>
+    </ul>
+
+    <h2>Information we process</h2>
+    <h3>1) Location (optional)</h3>
+    <p>
+      If you choose “Use my location”, your device’s browser/OS may provide an approximate or precise location. We use it only to set the pickup
+      location for distance calculations. You can always type a pickup address instead.
+    </p>
+
+    <h3>2) Addresses you enter</h3>
+    <p>
+      Pickup and drop-off addresses (or places) you type are used to calculate distance and generate a fare estimate. These values are processed
+      to provide the requested functionality.
+    </p>
+
+    <h3>3) App usage and device information</h3>
+    <p>
+      The Android app may process basic technical information required for operation (e.g., app version, device type, and diagnostic information),
+      and advertising partners may process identifiers for ad delivery and measurement (see “Advertising” below).
+    </p>
+
+    <h2>How we use information</h2>
+    <ul>
+      <li><strong>Provide quotes:</strong> calculate miles/kilometres and estimate fares using the fare rules configured in the app.</li>
+      <li><strong>Route and distance:</strong> obtain route distance between pickup and drop-off when you request it.</li>
+      <li><strong>Improve reliability:</strong> diagnose errors and improve performance.</li>
+      <li><strong>Advertising:</strong> show ads to help fund operation of the app.</li>
+    </ul>
+
+    <h2>Google Maps / Places / Directions</h2>
+    <p>
+      When you use distance features, the app uses Google APIs (such as Maps JavaScript API and Places) to provide address suggestions and compute
+      route distance. Your use of Google services is subject to Google’s terms and privacy policy.
+    </p>
+    <ul>
+      <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">https://policies.google.com/privacy</a></li>
+      <li>Google Terms of Service: <a href="https://policies.google.com/terms" rel="noopener noreferrer" target="_blank">https://policies.google.com/terms</a></li>
+    </ul>
+
+    <h2>Advertising (AdMob)</h2>
+    <p>
+      The Android app may show ads provided by Google AdMob. AdMob and its partners may collect and use information such as device identifiers,
+      IP address, approximate location (from IP), and ad interaction events to serve and measure ads, prevent fraud, and improve ad performance.
+      We do not control how third parties process data; their processing is governed by their own policies.
+    </p>
+    <p>
+      You can learn more about how Google uses information from sites or apps that use its services here:
+      <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">https://policies.google.com/technologies/partner-sites</a>.
+    </p>
+
+    <h2>Sharing of information</h2>
+    <p>
+      We share information only as needed to provide the service:
+    </p>
+    <ul>
+      <li><strong>Google APIs:</strong> for route/distance and place suggestions when you request them.</li>
+      <li><strong>Advertising partners (AdMob):</strong> for ad delivery, measurement, and fraud prevention in the Android app.</li>
+      <li><strong>Service providers:</strong> if we use hosting/analytics providers, they may process limited technical data to operate the service.</li>
+      <li><strong>Legal:</strong> if required to comply with law or protect rights/safety.</li>
+    </ul>
+
+    <h2>Data retention</h2>
+    <p>
+      The web-based calculator is designed to operate without storing your entered trip details on our servers. If we add server-side features in the
+      future (e.g., accounts, saved quotes), we will update this policy and describe retention periods.
+    </p>
+
+    <h2>Your choices</h2>
+    <ul>
+      <li><strong>Location:</strong> you can deny location permission and type a pickup address instead.</li>
+      <li><strong>Ads:</strong> ad settings and personalisation controls may be available in your device settings and Google account settings.</li>
+      <li><strong>Browser controls:</strong> you can clear site data/cookies in your browser settings.</li>
+    </ul>
+
+    <h2>Children’s privacy</h2>
+    <p>
+      This app is not directed to children under 13, and we do not knowingly collect personal information from children under 13.
+    </p>
+
+    <h2>Security</h2>
+    <p>
+      We use reasonable measures to protect the app and its configuration. However, no method of transmission or storage is completely secure.
+    </p>
+
+    <h2>International transfers</h2>
+    <p>
+      Third-party providers (such as Google) may process information on servers located in different countries. Their policies govern how such
+      processing occurs.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. We will update the effective date above, and material changes will be posted on this page.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Email: <strong>its.me.jack.09@gmail.com</strong>
+    </p>
+
+    <div class="card">
+      <p class="muted">
+ 
+      </p>
+    </div>
+  </div>
+</body>
+</html>
