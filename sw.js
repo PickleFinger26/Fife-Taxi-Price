@@ -1,4 +1,4 @@
-const CACHE_NAME = "kirkcaldy-quote-pwa-v2";
+const CACHE_NAME = "kirkcaldy-quote-pwa-v3";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
