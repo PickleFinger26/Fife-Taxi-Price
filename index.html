@@ -1,317 +1,135 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Fife Taxi Quotes</title>
-
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0b1220" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Taxi Quotes">
-
-  <style>
-    :root{--bg:#0b1220;--card:#111b2e;--text:#e8eefc;--muted:#a9b6d3;--line:#223154;--accent:#7aa2ff;}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 28px}
-    h1{font-size:18px;margin:0 0 6px}
-    .sub{margin:0;color:var(--muted);font-size:12px;line-height:1.35}
-    .grid{display:grid;gap:14px;grid-template-columns:1fr}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
-    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
-    input,select{width:100%;background:#0e172a;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;line-height:1.2}
-    input:focus,select:focus{border-color:var(--accent);outline:none}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:520px){.row{grid-template-columns:1fr}}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{border:0;border-radius:14px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer;background:var(--accent);color:#081022;flex:1}
-    button.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
-    .quote{font-size:34px;font-weight:900;letter-spacing:-0.6px;margin:8px 0 0}
-    .status{margin-top:6px;font-size:12px;color:#ffdf8a;min-height:16px}
-    table{width:100%;border-collapse:collapse;margin-top:10px}
-    td{padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
-    td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-    .pill{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;margin-right:6px;margin-top:6px}
-    .hint{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.35}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Taxi Quotes">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Fife Taxi Quotes</title>
+<style>
+:root{color-scheme:dark;--bg:#080e1a;--card:#111c2c;--field:#172437;--stroke:#2a3a52;--text:#f4f7ff;--sub:#a9b9d1;--blue:#76a8ff;--green:#42d7ab;--red:#fda6a6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}main{max-width:720px;margin:auto;padding:22px 15px 40px}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}h1{font-size:23px;letter-spacing:-.6px;margin:0;font-weight:800}small,.muted{color:var(--sub)}.eyebrow{color:var(--green);font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}.card{border:1px solid var(--stroke);border-radius:19px;background:var(--card);padding:19px;margin-bottom:14px;box-shadow:0 8px 24px #00000014}.heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}h2{font-size:15px;margin:0;font-weight:750}label{display:block;color:var(--sub);font-size:12px;font-weight:650;margin:0 0 7px}input,select{display:block;width:100%;padding:13px 12px;border:1px solid var(--stroke);border-radius:12px;background:var(--field);color:var(--text);font:inherit;min-width:0}input:focus,select:focus,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}input::placeholder{color:#8193ad}.field{margin:12px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid .field{margin:0}.location{display:flex;gap:10px;align-items:center}.location input{flex:1}.location .mini{flex:0 0 auto}.route-line{position:relative;border-left:2px dashed #3d557a;margin-left:7px;padding-left:18px}.route-line .field{position:relative}.route-line .field::before{content:'';position:absolute;left:-24px;top:35px;width:10px;height:10px;background:var(--blue);border-radius:50%;box-shadow:0 0 0 3px var(--card)}.route-line .field:last-child::before{background:var(--green)}.stop{display:flex;gap:8px;align-items:center;margin-bottom:10px}.stop input{flex:1}.btn{border:0;border-radius:12px;background:var(--blue);color:#071223;padding:13px 16px;font:inherit;font-weight:800;cursor:pointer}.btn.secondary{background:#20314a;color:var(--text)}.btn.outline{background:transparent;color:var(--blue);border:1px solid var(--stroke)}.btn.small{padding:10px 12px;font-size:12px}.btn.danger{background:#362735;color:#ffbfc5;padding:11px 13px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.full{width:100%}.distance-note{margin-top:10px;color:var(--sub);font-size:12px;min-height:16px}.result{background:linear-gradient(130deg,#172b42,#102537);border-color:#315875}.amount{font-size:45px;letter-spacing:-1.5px;line-height:1.15;font-weight:850;margin:8px 0 15px}.moneyline{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid #30435b;color:var(--sub)}.moneyline b{color:var(--text)}.status{font-size:12px;color:var(--sub);min-height:18px;margin-top:10px}.disclosure{margin:8px 2px 0;color:var(--sub);font-size:12px}details summary{cursor:pointer;color:var(--sub);font-size:12px}details p{color:var(--sub);font-size:12px;margin:8px 0 0}.note{font-size:12px;color:var(--sub);margin:0}.chip{color:var(--green);border:1px solid #24584e;background:#14322e;padding:5px 9px;font-size:11px;border-radius:100px;font-weight:750}button:disabled{opacity:.6;cursor:not-allowed}@media(max-width:420px){main{padding:18px 12px 35px}.card{padding:15px}.amount{font-size:40px}.grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Fife Taxi Quotes</h1>
-    <p class="sub">Pickup and drop-off are required. Use Google Maps to compute miles, then calculate the fare.</p>
-    <div>
-      <span class="pill">PWA</span>
-      <span class="pill">Stage 1 / Stage 2</span>
-      <span class="pill">Google distance</span>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <div class="row">
-          <div>
-            <label for="pickup">Pickup (required)</label>
-            <input id="pickup" type="text" placeholder="Type pickup address" autocomplete="street-address" />
-            <div class="btns" style="margin-top:8px">
-              <button id="useLocationBtn" type="button" class="secondary">Use my location</button>
-                </div>
-
-
-          </div>
-          
-          <div>
-            <label for="dropoff">Drop-off (required)</label>
-            <input id="dropoff" type="text" placeholder="Type destination address" autocomplete="street-address" />
-            <div class="btns" style="margin-top:8px">
-              <button id="getDistanceBtn" type="button">Get distance</button>
-            </div>
-            <div class="hint" id="routeInfo">Distance not calculated yet.</div>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top:6px">
-          <div>
-            <label for="preset">Preset miles (optional)</label>
-            <select id="preset">
-              <option value="">— Select —</option>
-              <option value="28">Kirkcaldy → Edinburgh (approx. 28 mi)</option>
-              <option value="65">Kirkcaldy → Glasgow (approx. 65 mi)</option>
-              <option value="33">Kirkcaldy → Dundee (approx. 33 mi)</option>
-              <option value="110">Kirkcaldy → Aberdeen (approx. 110 mi)</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="distanceMi">Distance (miles)</label>
-            <input id="distanceMi" type="number" min="0" step="0.1" inputmode="decimal" value="0.0" />
-            <div class="hint">Filled by “Get distance” or enter manually.</div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label for="stage">Stage</label>
-            <select id="stage">
-              <option value="1">Stage 1 (06:00–22:00)</option>
-              <option value="2">Stage 2 (22:00–06:00 / beyond Fife boundary)</option>
-            </select>
-          </div>
-          <div>
-            <label for="waitingMin">Waiting (minutes)</label>
-            <input id="waitingMin" type="number" min="0" step="1" inputmode="numeric" value="0" />
-          </div>
-        </div>
-
-        <div class="btns">
-          <button id="calcBtn" type="button">Calculate</button>
-          <button id="resetBtn" type="button" class="secondary">Reset</button>
-        </div>
-
-
-      <div class="card">
-        <div class="quote" id="total">£0.00</div>
-        <div class="status" id="status">Enter pickup & drop-off. Get distance. Then Calculate.</div>
-
-        <table>
-          <tbody>
-            <tr><td>Distance charge</td><td id="distCharge">£0.00</td></tr>
-            <tr><td>Waiting charge</td><td id="waitCharge">£0.00</td></tr>
-            <tr><td><strong>Total</strong></td><td><strong id="total2">£0.00</strong></td></tr>
-          </tbody>
-        </table>
-
-        <p class="sub" style="margin-top:10px">
-          Tariff: Stage 1 £3.60 up to 549m then £0.20 per 137m; Stage 2 £4.50 up to 549m then £0.25 per 137m; Waiting £0.20 per 48s.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ---------------------------
-    // Fare calculator (global)
-    // ---------------------------
-    const METERS_PER_MILE = 1609.344;
-
-    const TARIFF = {
-      stage1: { baseMeters: 549, baseFare: 3.60, stepMeters: 137, stepFare: 0.20 },
-      stage2: { baseMeters: 549, baseFare: 4.50, stepMeters: 137, stepFare: 0.25 },
-      waiting: { periodSeconds: 48, periodFare: 0.20 }
-    };
-
-    function money(n){
-      const v = Math.round(n * 100) / 100;
-      return '£' + v.toFixed(2);
-    }
-
-    function calcDistanceFare(meters, stageNum){
-      const cfg = (stageNum === 2) ? TARIFF.stage2 : TARIFF.stage1;
-      if (meters <= 0) return 0;
-      if (meters <= cfg.baseMeters) return cfg.baseFare;
-      const extra = meters - cfg.baseMeters;
-      const steps = Math.ceil(extra / cfg.stepMeters);
-      return cfg.baseFare + steps * cfg.stepFare;
-    }
-
-    function calcWaitingFare(mins){
-      const sec = Math.max(0, mins) * 60;
-      if (sec <= 0) return 0;
-      const periods = Math.ceil(sec / TARIFF.waiting.periodSeconds);
-      return periods * TARIFF.waiting.periodFare;
-    }
-
-    function calculate(){
-      const mi = parseFloat(document.getElementById('distanceMi').value || '0');
-      const meters = Math.max(0, mi) * METERS_PER_MILE;
-
-      const stageNum = parseInt(document.getElementById('stage').value, 10);
-      const mins = parseFloat(document.getElementById('waitingMin').value || '0');
-
-      const d = calcDistanceFare(meters, stageNum);
-      const w = calcWaitingFare(mins);
-      const t = d + w;
-
-      document.getElementById('distCharge').textContent = money(d);
-      document.getElementById('waitCharge').textContent = money(w);
-      document.getElementById('total').textContent = money(t);
-      document.getElementById('total2').textContent = money(t);
-      document.getElementById('status').textContent = 'Ready';
-    }
-
-    function resetAll(){
-      document.getElementById('pickup').value = '';
-      document.getElementById('dropoff').value = '';
-      document.getElementById('preset').value = '';
-      document.getElementById('distanceMi').value = '0.0';
-      document.getElementById('stage').value = '1';
-      document.getElementById('waitingMin').value = '0';
-      document.getElementById('routeInfo').textContent = 'Distance not calculated yet.';
-      document.getElementById('status').textContent = 'Enter pickup & drop-off. Get distance. Then Calculate.';
-      calculate();
-    }
-
-    // ---------------------------
-    // Google Maps: Places + Directions
-    // ---------------------------
-    let pickupPlace = null;
-    let dropoffPlace = null;
-    let pickupLatLng = null;
-
-    function requireText(id, friendlyName){
-      const el = document.getElementById(id);
-      const value = (el.value || '').trim();
-      if (!value) throw new Error('Please enter a ' + friendlyName + '.');
-      return value;
-    }
-
-    // Called by Google script (callback=initMaps)
-    function initMaps(){
-      const status = document.getElementById('status');
-      const pickupInput = document.getElementById('pickup');
-      const dropoffInput = document.getElementById('dropoff');
-
-      try{
-        const pickupAC = new google.maps.places.Autocomplete(pickupInput, { fields: ['geometry', 'formatted_address'] });
-        const dropoffAC = new google.maps.places.Autocomplete(dropoffInput, { fields: ['geometry', 'formatted_address'] });
-
-        pickupAC.addListener('place_changed', () => {
-          pickupPlace = pickupAC.getPlace();
-          pickupLatLng = null;
-          status.textContent = 'Pickup set. Enter drop-off then Get distance.';
-        });
-
-        dropoffAC.addListener('place_changed', () => {
-          dropoffPlace = dropoffAC.getPlace();
-          status.textContent = 'Drop-off set. Tap Get distance.';
-        });
-
-        document.getElementById('useLocationBtn').addEventListener('click', () => {
-          if (!navigator.geolocation){
-            alert('Geolocation not supported on this device.');
-            return;
-          }
-          navigator.geolocation.getCurrentPosition(
-            (pos) => {
-              pickupLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-              pickupPlace = null;
-              pickupInput.value = 'Current location';
-              status.textContent = 'Pickup set to current location. Enter drop-off then Get distance.';
-            },
-            () => alert('Could not get location. Check permissions and ensure you are on HTTPS.')
-          );
-        });
-
-        document.getElementById('getDistanceBtn').addEventListener('click', () => {
-          try{
-            if (!pickupLatLng) requireText('pickup', 'pickup location');
-            requireText('dropoff', 'drop-off location');
-
-            const origin =
-              pickupLatLng
-                ? pickupLatLng
-                : (pickupPlace && pickupPlace.geometry ? pickupPlace.geometry.location : pickupInput.value);
-
-            const destination =
-              (dropoffPlace && dropoffPlace.geometry ? dropoffPlace.geometry.location : dropoffInput.value);
-
-            if (!origin || !destination){
-              alert('Please enter a pickup and drop-off.');
-              return;
-            }
-
-            status.textContent = 'Calculating route…';
-
-            const ds = new google.maps.DirectionsService();
-            ds.route(
-              { origin, destination, travelMode: google.maps.TravelMode.DRIVING },
-              (result, routeStatus) => {
-                if (routeStatus !== 'OK' || !result?.routes?.[0]?.legs?.[0]){
-                  alert('Could not calculate route. Check addresses and try again.');
-                  status.textContent = 'Route failed. Check addresses.';
-                  return;
-                }
-
-                const leg = result.routes[0].legs[0];
-                const meters = leg.distance.value;
-                const miles = meters / METERS_PER_MILE;
-
-                document.getElementById('distanceMi').value = miles.toFixed(1);
-                document.getElementById('routeInfo').textContent =
-                  'Route: ' + leg.distance.text + ' • approx ' + miles.toFixed(1) + ' miles';
-
-                calculate();
-              }
-            );
-          }catch(err){
-            alert(err.message || 'Please enter pickup and drop-off.');
-          }
-        });
-
-        document.getElementById('preset').addEventListener('change', (e) => {
-          if (e.target.value){
-            document.getElementById('distanceMi').value = e.target.value;
-            status.textContent = 'Preset miles selected. Press Calculate.';
-          }
-        });
-
-        document.getElementById('calcBtn').addEventListener('click', calculate);
-        document.getElementById('resetBtn').addEventListener('click', resetAll);
-
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('sw.js').catch(()=>{});
-        }
-
-        status.textContent = 'Enter pickup and drop-off, then Get distance.';
-      }catch(e){
-        status.textContent = 'Maps not available. You can still type miles manually.';
-      }
-    }
-
-    window.addEventListener('load', () => calculate());
-  </script>
-
-  <!-- REPLACE YOUR_API_KEY. Keep callback=initMaps -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC_trZsA05S8IMIpIBHcVv2MOmtToRgoQ&libraries=places&callback=initMaps" async defer></script>
-</body>
-</html>
+<main>
+<header><div><div class="eyebrow">Fare calculator</div><h1>Fife Taxi Quotes</h1></div><span class="chip">2026 fares</span></header>
+<section class="card" aria-labelledby="journeyTitle">
+<div class="heading"><h2 id="journeyTitle">Your journey</h2><button type="button" class="btn outline small" id="useLocationBtn">Use my location</button></div>
+<div class="route-line">
+<div class="field"><label for="pickup">Pickup</label><input id="pickup" autocomplete="street-address" placeholder="Enter pickup address"></div>
+<div id="stops" aria-label="Intermediate stops"></div>
+<div class="field"><label for="dropoff">Destination</label><input id="dropoff" autocomplete="street-address" placeholder="Enter destination"></div>
+</div>
+<button type="button" class="btn outline small" id="addStopBtn">＋ Add stop</button>
+<div class="actions"><button type="button" class="btn full" id="getDistanceBtn">Get route distance</button><button type="button" class="btn secondary full" id="resetBtn">Reset</button></div>
+<div class="distance-note" id="routeInfo">Enter a journey or use manual miles below.</div>
+</section>
+<section class="card" aria-labelledby="fareTitle">
+<div class="heading"><h2 id="fareTitle">Fare details</h2></div>
+<div class="field"><label for="stage">Tariff</label><select id="stage"><option value="1">Stage 1 · Day</option><option value="2">Stage 2 · Night / outside Fife</option><option value="3">Stage 3 · Festive day (+50%)</option><option value="4">Stage 4 · Festive night (+50%)</option></select></div>
+<div class="grid"><div class="field"><label for="distanceMi">Distance (miles)</label><input id="distanceMi" type="number" value="0.0" min="0" step="any" inputmode="decimal"></div><div class="field"><label for="waitingMin">Waiting (minutes)</label><input id="waitingMin" type="number" value="0" min="0" step="any" inputmode="decimal"></div></div>
+<details class="disclosure"><summary>Quick distance presets</summary><div class="field"><select id="preset"><option value="">Choose approximate journey</option><option value="28">Kirkcaldy → Edinburgh · 28 mi</option><option value="65">Kirkcaldy → Glasgow · 65 mi</option><option value="33">Kirkcaldy → Dundee · 33 mi</option><option value="110">Kirkcaldy → Aberdeen · 110 mi</option></select></div></details>
+<button type="button" class="btn full" id="calcBtn" style="margin-top:16px">Calculate fare</button>
+</section>
+<section class="card result" aria-live="polite"><div class="eyebrow">Estimated fare</div><div class="amount" id="total">£0.00</div><div class="moneyline"><span>Distance</span><b id="distCharge">£0.00</b></div><div class="moneyline"><span>Waiting</span><b id="waitCharge">£0.00</b></div><div class="status" id="status">Ready to calculate</div></section>
+<details class="disclosure"><summary>Fare rules & extra charges</summary><p>Fife Council rates effective 25 May 2026. First 549m: Stage 1 £3.78; Stage 2 £4.95. Each additional 137m or part: £0.21 / £0.28. Festive Stages 3 and 4 add 50% to the corresponding Stage 1 or 2 distance fare; waiting remains £0.20 per 48 seconds. Holiday time windows are specified on the official fare plate. Excess load up to £5; soiling £60 (not included).</p><p>This is an estimate, not a certified taximeter. Select the applicable stage manually.</p></details>
+</main>
+<script>
+'use strict';
+const METERS_PER_MILE=1609.344;
+const TARIFF={stage1:{baseMeters:549,baseFare:3.78,stepMeters:137,stepFare:.21},stage2:{baseMeters:549,baseFare:4.95,stepMeters:137,stepFare:.28},waiting:{periodSeconds:48,periodFare:.20}};
+const $=id=>document.getElementById(id);
+const money=n=>'£'+(Math.round((n+Number.EPSILON)*100)/100).toFixed(2);
+let pickupPlace=null,dropoffPlace=null,pickupLatLng=null,stopCounter=0;
+let mapsReady=false;
+const routePlaces=new Map();
+function fare(meters,stage){
+  if(meters<=0)return 0;
+  const cfg=(stage===2||stage===4)?TARIFF.stage2:TARIFF.stage1;
+  const steps=Math.max(0,Math.ceil((meters-cfg.baseMeters)/cfg.stepMeters));
+  const standard=cfg.baseFare+steps*cfg.stepFare;
+  return (stage===3||stage===4)?standard*1.5:standard;
+}
+function waitingFare(minutes){return Math.ceil(Math.max(0,minutes)*60/TARIFF.waiting.periodSeconds)*TARIFF.waiting.periodFare;}
+function value(id){let n=Number($(id).value);return Number.isFinite(n)&&n>0?n:0;}
+function calculate(){
+  const dist=fare(value('distanceMi')*METERS_PER_MILE,Number($('stage').value));
+  const waiting=waitingFare(value('waitingMin'));
+  $('distCharge').textContent=money(dist);$('waitCharge').textContent=money(waiting);$('total').textContent=money(dist+waiting);
+  $('status').textContent='Estimated fare · tariff selected manually';
+}
+function bindAutocomplete(input,onSelect){
+ if(!mapsReady)return;
+ const ac=new google.maps.places.Autocomplete(input,{fields:['geometry','formatted_address']});
+ ac.addListener('place_changed',()=>onSelect(ac.getPlace()));
+}
+function addStop(){
+ if($('stops').children.length>=23){alert('Maximum 23 intermediate stops.');return;}
+ const id='stop_'+(++stopCounter),wrap=document.createElement('div');wrap.className='field';wrap.dataset.stopId=id;
+ const label=document.createElement('label');label.htmlFor=id;label.textContent='Stop '+$('stops').children.length;
+ const row=document.createElement('div');row.className='stop';const input=document.createElement('input');input.id=id;input.placeholder='Enter stop address';input.autocomplete='street-address';
+ const remove=document.createElement('button');remove.type='button';remove.className='btn danger small';remove.textContent='Remove';remove.setAttribute('aria-label','Remove stop');
+ remove.addEventListener('click',()=>{wrap.remove();routePlaces.delete(id);renumberStops();routeChanged();});
+ input.addEventListener('input',()=>{routePlaces.delete(id);routeChanged();});row.append(input,remove);wrap.append(label,row);$('stops').append(wrap);
+ bindAutocomplete(input,place=>{routePlaces.set(id,place);routeChanged();});routeChanged();
+}
+function renumberStops(){[...$('stops').children].forEach((row,i)=>row.querySelector('label').textContent='Stop '+(i+1));}
+function routeChanged(){$('routeInfo').textContent='Route changed · tap Get route distance';}
+function requireInput(id,name){const s=$(id).value.trim();if(!s)throw Error('Please enter '+name+'.');return s;}
+function waypointFor(row){const input=row.querySelector('input');const place=routePlaces.get(input.id);return {location:place?.geometry?.location||input.value.trim(),stopover:true};}
+function getRouteDistance(){
+ try{
+  if(!mapsReady)throw Error('Google Maps is unavailable. You can enter miles manually.');
+  if(!pickupLatLng)requireInput('pickup','a pickup address');requireInput('dropoff','a destination');
+  const stops=[...$('stops').children];for(let i=0;i<stops.length;i++){if(!stops[i].querySelector('input').value.trim())throw Error('Please fill or remove Stop '+(i+1));}
+  const origin=pickupLatLng||pickupPlace?.geometry?.location||$('pickup').value.trim();
+  const destination=dropoffPlace?.geometry?.location||$('dropoff').value.trim();
+  $('status').textContent='Calculating route…';$('getDistanceBtn').disabled=true;
+  new google.maps.DirectionsService().route({origin,destination,waypoints:stops.map(waypointFor),optimizeWaypoints:false,travelMode:google.maps.TravelMode.DRIVING},(result,status)=>{
+   $('getDistanceBtn').disabled=false;
+   if(status!=='OK'||!result?.routes?.[0]?.legs?.length){$('status').textContent='Route unavailable: '+status;return;}
+   const meters=result.routes[0].legs.reduce((sum,leg)=>sum+(leg.distance?.value||0),0);
+   // Keep full-route precision for fare calculations, rather than rounding to 0.1 miles.
+   $('distanceMi').value=(meters/METERS_PER_MILE).toFixed(5);
+   $('routeInfo').textContent=(meters/METERS_PER_MILE).toFixed(1)+' miles · '+result.routes[0].legs.length+' route leg(s)';
+   calculate();
+  });
+ }catch(err){$('status').textContent=err.message;}
+}
+function resetAll(){
+ $('pickup').value='';$('dropoff').value='';$('stops').replaceChildren();routePlaces.clear();pickupPlace=null;dropoffPlace=null;pickupLatLng=null;
+ $('stage').value='1';$('preset').value='';$('distanceMi').value='0.0';$('waitingMin').value='0';$('routeInfo').textContent='Enter a journey or use manual miles below.';calculate();
+}
+function initMaps(){
+ try{
+  mapsReady=Boolean(window.google?.maps?.places?.Autocomplete&&google.maps.DirectionsService);
+  if(!mapsReady)throw Error('Maps not available');
+  bindAutocomplete($('pickup'),place=>{pickupPlace=place;pickupLatLng=null;routeChanged();});
+  bindAutocomplete($('dropoff'),place=>{dropoffPlace=place;routeChanged();});
+ }catch(err){mapsReady=false;$('status').textContent='Maps unavailable · manual miles still work';}
+}
+window.initMaps=initMaps;
+$('pickup').addEventListener('input',()=>{pickupPlace=null;pickupLatLng=null;routeChanged();});
+$('dropoff').addEventListener('input',()=>{dropoffPlace=null;routeChanged();});
+$('addStopBtn').addEventListener('click',addStop);
+$('getDistanceBtn').addEventListener('click',getRouteDistance);
+$('calcBtn').addEventListener('click',calculate);
+$('resetBtn').addEventListener('click',resetAll);
+$('preset').addEventListener('change',e=>{if(e.target.value){$('distanceMi').value=e.target.value;calculate();}});
+$('stage').addEventListener('change',calculate);
+$('waitingMin').addEventListener('change',calculate);
+$('distanceMi').addEventListener('change',calculate);
+$('useLocationBtn').addEventListener('click',()=>{
+ if(!navigator.geolocation){$('status').textContent='Geolocation unavailable';return;}
+ $('status').textContent='Getting current location…';
+ navigator.geolocation.getCurrentPosition(pos=>{
+  if(!window.google?.maps?.LatLng){$('status').textContent='Maps unavailable';return;}
+  pickupLatLng=new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);pickupPlace=null;$('pickup').value='Current location';routeChanged();
+ },()=>{$('status').textContent='Location unavailable · check permissions and HTTPS';},{enableHighAccuracy:true,timeout:15000});
+});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+calculate();
+</script>
